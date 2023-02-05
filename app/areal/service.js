@@ -9,12 +9,30 @@ class ArealService {
   }
 
   async getAll() {
-    const areals = await Areal.find().populate({
-      path: 'hexagons',
-      model: 'Hexagon',
-      strictPopulate:false
-    }).exec();
-    return areals
+    const areals = await Areal.find();
+    const aggregation = await Areal.aggregate([
+      {
+        $lookup: {
+          from: 'hexagons',
+          localField: '_id',
+          foreignField: 'areal',
+          as: 'hexagons'
+        }
+      },
+      {
+        $unwind: '$hexagons'
+      },
+      {
+        $group: {
+          _id: '$_id',
+          title: {$first: '$title'},
+          picture: {$first: '$picture'},
+          hexagons: {$push: '$hexagons'}
+        }
+      }
+    ]);
+
+    return aggregation
   }
 
   async getOne(id) {

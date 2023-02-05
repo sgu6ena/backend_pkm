@@ -1,11 +1,9 @@
-import mongoose, {Schema} from "mongoose";
-import Hexagon from "../hexagons/schema.js";
+import mongoose from "mongoose";
 
 const ArealSchema = new mongoose.Schema({
-  _id: Schema.Types.ObjectId,
-  title: {type: String, required: true},
-  picture: {type: String, required: false},
-  hexagons: [{type: Schema.Types.ObjectId, ref: Hexagon}]
+    title: {type: String, required: true},
+    picture: {type: String, required: false},
+    // hexagons: [{type: mongoose.Schema.Types.ObjectId, ref: "Hexagon"}]
 });
 
 const Areal = mongoose.model('Areal', ArealSchema);
