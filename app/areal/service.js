@@ -19,9 +19,32 @@ class ArealService {
           as: 'hexagons',
         },
       },
+      {
+        $unwind:'$hexagons'
+      },
+      {
+        $lookup: {
+          from: 'themes',
+          localField: 'hexagons.themes',
+          foreignField: '_id',
+          as: 'hexagons.themes',
+        },
+      },
+      {
+        $group: {
+          _id: '$_id',
+          title: { $first: '$title' },
+          picture: { $first: '$ picture' },
+          hexagons: {
+            $push: '$hexagons'
+            ,
+          },
+          __v: { $first: '$__v' },
+        },
+      },
     ]);
 
-    return areals
+    return areals;
   }
 
   async getOne(id) {

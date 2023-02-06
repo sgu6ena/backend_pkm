@@ -17,8 +17,8 @@ app.use('/api', hexagonRouter)
 app.use('/api', typeRouter)
 app.use('/api', arealRouter)
 app.use('/api', themeRouter)
-const url = 'mongodb://localhost:27017/pkm'; // урл для сервиса с mongodb
-//const url = 'mongodb+srv://sgu6ena:Kct9VvPVm3eyM6r@cluster0.l2p9zk1.mongodb.net/?retryWrites=true&w=majority'
+//const url = 'mongodb://localhost:27017/pkm'; // урл для сервиса с mongodb
+const url = 'mongodb+srv://sgu6ena:Kct9VvPVm3eyM6r@cluster0.l2p9zk1.mongodb.net/?retryWrites=true&w=majority'
 
 mongoose.set('strictQuery', true);
 

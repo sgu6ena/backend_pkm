@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const HexagonSchema = new mongoose.Schema({
+export const HexagonSchema = new mongoose.Schema({
   title: {type: String, required: true},
   row: {type: String, required: true},
   column: {type: String, required: true},
