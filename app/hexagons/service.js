@@ -9,7 +9,7 @@ class HexagonService {
   }
 
   async getAll() {
-    const hexagons = await Hexagon.find().populate('areal');
+    const hexagons = await Hexagon.find().populate(['areal','themes']);
     return hexagons
   }
 
@@ -17,7 +17,7 @@ class HexagonService {
     if (!id) {
       throw new Error("id не указан")
     }
-    const hexagon = await Hexagon.findById(id).populate('areal_id');
+    const hexagon = await Hexagon.findById(id).populate(['areal','themes']);
     return hexagon
   }
 

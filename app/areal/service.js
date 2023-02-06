@@ -16,8 +16,8 @@ class ArealService {
           from: 'hexagons',
           localField: '_id',
           foreignField: 'areal',
-          as: 'hexagons'
-        }
+          as: 'hexagons',
+        },
       },
     ]);
 
