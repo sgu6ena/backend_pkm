@@ -1,5 +1,6 @@
 import Areal from "./schema.js";
 import FileService from "../fileService.js";
+import {ObjectId} from "mongodb";
 
 class ArealService {
   async create(areal, picture) {
@@ -9,8 +10,7 @@ class ArealService {
   }
 
   async getAll() {
-    const areals = await Areal.find();
-    const aggregation = await Areal.aggregate([
+    const areals = await Areal.aggregate([
       {
         $lookup: {
           from: 'hexagons',
@@ -19,27 +19,28 @@ class ArealService {
           as: 'hexagons'
         }
       },
-      // {
-      //   $unwind: '$hexagons'
-      // },
-      // {
-      //   $group: {
-      //     _id: '$_id',
-      //     title: {$first: '$title'},
-      //     picture: {$first: '$picture'},
-      //     hexagons: {$push: '$hexagons'}
-      //   }
-      // }
     ]);
 
-    return aggregation
+    return areals
   }
 
   async getOne(id) {
     if (!id) {
       throw new Error("id не указан")
     }
-    const areal = await Areal.findById(id).populate( 'hexagons').exec();
+    const areal = await Areal.aggregate([
+      {
+        $match: {_id: ObjectId(id)}
+      },
+      {
+        $lookup: {
+          from: 'hexagons',
+          localField: '_id',
+          foreignField: 'areal',
+          as: 'hexagons'
+        }
+      },
+    ]);
 
     return areal
   }
