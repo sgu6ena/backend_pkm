@@ -19,17 +19,17 @@ class ArealService {
           as: 'hexagons'
         }
       },
-      {
-        $unwind: '$hexagons'
-      },
-      {
-        $group: {
-          _id: '$_id',
-          title: {$first: '$title'},
-          picture: {$first: '$picture'},
-          hexagons: {$push: '$hexagons'}
-        }
-      }
+      // {
+      //   $unwind: '$hexagons'
+      // },
+      // {
+      //   $group: {
+      //     _id: '$_id',
+      //     title: {$first: '$title'},
+      //     picture: {$first: '$picture'},
+      //     hexagons: {$push: '$hexagons'}
+      //   }
+      // }
     ]);
 
     return aggregation
