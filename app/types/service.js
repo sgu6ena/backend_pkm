@@ -2,7 +2,7 @@ import Type from "./schema.js";
 import FileService from "../fileService.js";
 
 class TypeService {
-  async create(type, picture) {
+  async create(type, picture=null) {
     const fileName = FileService.saveFile(picture);
     const createdType = await Type.create({...type, picture:fileName});
     return createdType;

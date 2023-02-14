@@ -2,14 +2,14 @@ import Pokemon from "./schema.js";
 import FileService from "../fileService.js";
 
 class PokemonService {
-  async create(pokemon, picture) {
+  async create(pokemon, picture=null) {
     const fileName = FileService.saveFile(picture);
     const createdPokemon = await Pokemon.create({...pokemon, picture: fileName});
     return createdPokemon;
   }
 
   async getAll() {
-    const pokemons = await Pokemon.find();
+    const pokemons = await Pokemon.find().populate(['areal', 'next', 'prev', 'firstType', 'secondType']);
     return pokemons
   }
 
@@ -17,14 +17,15 @@ class PokemonService {
     if (!id) {
       throw new Error("id не указан")
     }
-    const pokemon = await Pokemon.findById(id);
+    const pokemon = await Pokemon.findById(id).populate(['areal', 'next', 'prev', 'firstType', 'secondType']);
     return pokemon
   }
+
   async getByTypeId(id) {
     if (!id) {
       throw new Error("id не указан")
     }
-    const pokemon = await Pokemon.findById(id);
+    const pokemon = await Pokemon.find({firstType: id}).populate(['areal', 'next', 'prev', 'firstType', 'secondType']);
     return pokemon
   }
 

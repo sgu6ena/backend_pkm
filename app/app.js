@@ -27,7 +27,7 @@ mongoose.set('strictQuery', true);
 
 async function startApp() {
   try {
-    await mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true,})
+    await mongoose.connect(url, {}, ()=>{})
 
     app.listen(port, () => {
       console.log(`Example app listening on port ${port}`)

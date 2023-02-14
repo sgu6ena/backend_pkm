@@ -18,6 +18,15 @@ class ArealController {
       return res.status(500).json(e.message)
     }
   }
+  async getAllWithHexagons(req, res) {
+    try {
+      const areals = await ArealService.getAllWithHexagons();
+      res.json(areals);
+    } catch (e) {
+      return res.status(500).json(e.message)
+    }
+  }
+
 
   async getOne(req, res) {
     try {

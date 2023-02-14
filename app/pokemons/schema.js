@@ -7,9 +7,8 @@ const PokemonSchema = new mongoose.Schema({
   firstType: {type: mongoose.Schema.Types.ObjectId, ref: "Type", required: false},
   secondType: {type: mongoose.Schema.Types.ObjectId, ref: "Type", required: false},
   areal: {type: mongoose.Schema.Types.ObjectId, ref: "Areal"},
-  prevId: {type: mongoose.Schema.Types.ObjectId, ref: "Pokemon", required: false},
-  nextId: {type: mongoose.Schema.Types.ObjectId, ref: "Pokemon", required: false},
-
+  prev: {type: mongoose.Schema.Types.ObjectId, ref: "Pokemon", required: false},
+  next: {type: mongoose.Schema.Types.ObjectId, ref: "Pokemon", required: false},
 });
 
 const Pokemon = mongoose.model('Pokemon', PokemonSchema);

@@ -2,7 +2,7 @@ import Hexagon from "./schema.js";
 import FileService from "../fileService.js";
 
 class HexagonService {
-  async create(hexagon, picture) {
+  async create(hexagon, picture=null) {
     const fileName = FileService.saveFile(picture);
     const createdHexagon = await Hexagon.create({...hexagon, picture:fileName});
     return createdHexagon;

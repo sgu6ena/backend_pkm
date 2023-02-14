@@ -1,15 +1,19 @@
 import Areal from "./schema.js";
 import FileService from "../fileService.js";
 import {ObjectId} from "mongodb";
+import Pokemon from "../pokemons/schema.js";
 
 class ArealService {
-  async create(areal, picture) {
+  async create(areal, picture=null) {
     const fileName = FileService.saveFile(picture);
     const createdAreal = await Areal.create({...areal, picture: fileName});
     return createdAreal;
   }
-
   async getAll() {
+    const pokemons = await Areal.find();
+    return pokemons
+  }
+  async getAllWithHexagons() {
     const areals = await Areal.aggregate([
       {
         $lookup: {
