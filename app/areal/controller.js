@@ -3,7 +3,7 @@ import ArealService from './service.js'
 class ArealController {
   async create(req, res) {
     try {
-      const areal = await ArealService.create(req.body, req.files.picture)
+      const areal = await ArealService.create(req.body, req.files?.picture||'')
       res.json(areal);
     } catch (e) {
       return res.status(500).json(e.message)
